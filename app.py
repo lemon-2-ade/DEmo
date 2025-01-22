@@ -9,6 +9,19 @@ load_dotenv()
 
 app = FastAPI()
 
+from fastapi.middleware.cors import CORSMiddleware
+
+app = FastAPI()
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins; specify domains if needed
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all HTTP methods
+    allow_headers=["*"],  # Allows all HTTP headers
+)
+
 def get_content(image: Image):
     api_key = os.getenv("OCR_API_KEY")
     genai.configure(api_key=api_key)
